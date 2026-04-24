@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Analysis">
+
+    <!-- Tabs -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@android:color/white"
+        app:tabSelectedTextColor="@android:color/holo_purple"
+        app:tabTextColor="#B0AC74BB"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weekly" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yearly" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Date"
+        app:icon="@android:drawable/arrow_down_float"
+        app:iconGravity="end"
+        app:iconTint="@android:color/white"
+        android:backgroundTint="#6A1B9A"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="12dp"/>
+
+
+    <!-- Income -->
+    <TextView
+        android:id="@+id/tvTotalIncome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Income: R0.00"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/btnDate"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Expenses -->
+    <TextView
+        android:id="@+id/tvTotalExpense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expenses: R0.00"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalIncome"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Graph Placeholder -->
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalIncome"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="300dp"/>
+
+    <!-- Search -->
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Search category"
+        app:layout_constraintTop_toBottomOf="@id/barChart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+    <!-- Filter Button -->
+    <Button
+        android:id="@+id/btnFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        app:layout_constraintTop_toBottomOf="@id/etSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Results -->
+    <TextView
+        android:id="@+id/tvResults"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Results will appear here"
+        app:layout_constraintTop_toBottomOf="@id/btnFilter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
