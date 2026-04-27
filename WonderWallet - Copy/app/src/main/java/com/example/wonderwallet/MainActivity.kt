@@ -1,14 +1,16 @@
 package com.example.wonderwallet
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.widget.GridView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.wonderwallet.adapter.CategoryAdapter
 import com.example.wonderwallet.model.Category
+import com.example.wonderwallet.model.WonderWalletDB
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var db: WonderWalletDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,20 +18,36 @@ class MainActivity : AppCompatActivity() {
 
         val grid = findViewById<GridView>(R.id.gridCategories)
 
-        val categories = listOf(
-            Category(1, "Food"),
-            Category(2, "Transport"),
-            Category(3, "Medicine"),
-            Category(4, "Groceries"),
-            Category(5, "Rent"),
-            Category(6, "Gifts"),
-            Category(7, "Savings"),
-            Category(8, "Entertainment"),
-            Category(9, "More")
-        )
+        db = WonderWalletDB.getDatabase(this)
 
         val adapter = CategoryAdapter(this, categories)
         grid.adapter = adapter
     }
 
+        val categoryDao = db.categoryDao()
+
+        //  Load categories from database
+        categoryDao.getAllCategories().observe(this) { categories ->
+
+            if (categories.isEmpty()) {
+                Toast.makeText(this, "No categories found", Toast.LENGTH_SHORT).show()
+            }
+
+            val adapter = CategoryAdapter(this, categories)
+            grid.adapter = adapter
+        }
+
+        //  Category click handling (IMPORTANT FOR FUNCTIONALITY)
+        grid.setOnItemClickListener { _, _, position, _ ->
+
+            val selectedCategory = grid.adapter.getItem(position) as Category
+
+            // Example: navigate to another screen (you can change this)
+            val intent = Intent(this, Analysis::class.java).apply {
+                putExtra("category_name", selectedCategory.name)
+            }
+
+            startActivity(intent)
+        }
+    }
 }
