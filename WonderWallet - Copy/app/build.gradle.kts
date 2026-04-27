@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.devtools.ksp")
+
 }
 
 android {
     namespace = "com.example.wonderwallet"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.wonderwallet"
@@ -42,4 +42,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("androidx.room:room-runtime:2.7.2")
+    implementation("androidx.room:room-ktx:2.7.2")
+    ksp("androidx.room:room-compiler:2.7.2")
+
+
 }
+
