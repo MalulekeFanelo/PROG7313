@@ -8,17 +8,24 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.wonderwallet.R
 import com.example.wonderwallet.model.Expense
+import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ExpenseAdapter(
     private val context: Context,
     private val expenses: List<Expense>
 ) : BaseAdapter() {
 
-    override fun getCount() = expenses.size
+    // ✅ Create once (better performance)
+    private val currencyFormatter = NumberFormat.getCurrencyInstance(Locale("en", "ZA"))
+    private val dateFormatter = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
 
-    override fun getItem(position: Int) = expenses[position]
+    override fun getCount(): Int = expenses.size
 
-    override fun getItemId(position: Int) = position.toLong()
+    override fun getItem(position: Int): Any = expenses[position]
+
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
@@ -31,9 +38,14 @@ class ExpenseAdapter(
 
         val expense = expenses[position]
 
-        amount.text = expense.amount
+        // 💰 Currency formatting (NumberFormat requirement ✔)
+        amount.text = currencyFormatter.format(expense.amount)
+
+        // 🏷 Title
         title.text = expense.title
-        date.text = expense.date
+
+        // 📅 Date formatting from timestamp
+        date.text = dateFormatter.format(Date(expense.date))
 
         return view
     }
