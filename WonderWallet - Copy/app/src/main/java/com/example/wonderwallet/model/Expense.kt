@@ -2,6 +2,11 @@ package com.example.wonderwallet.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+<<<<<<< HEAD
+import java.util.Date
+
+=======
+>>>>>>> 795d7939929ee39dc821bb3f7c9d7adf789c4e7b
 
 @Entity(tableName = "expenses")
 data class Expense(

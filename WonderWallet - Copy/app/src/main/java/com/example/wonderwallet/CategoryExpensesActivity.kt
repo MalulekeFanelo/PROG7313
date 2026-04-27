@@ -1,16 +1,15 @@
 package com.example.wonderwallet
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import android.widget.TextView
-import android.widget.ListView
-import com.example.wonderwallet.model.Expense
 import com.example.wonderwallet.adapter.ExpenseAdapter
+import com.example.wonderwallet.model.Expense
+import com.example.wonderwallet.model.WonderWalletDB
 
 class CategoryExpensesActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_expenses)
@@ -19,16 +18,29 @@ class CategoryExpensesActivity : AppCompatActivity() {
 
         val title = findViewById<TextView>(R.id.txtCategoryTitle)
         val list = findViewById<ListView>(R.id.listExpenses)
+        val btnAddExpense = findViewById<Button>(R.id.btnAddExpense)
 
         title.text = categoryName
 
-        val expenses = listOf(
-            Expense("Dinner", "-R453.00", "April 30"),
-            Expense("Pizza", "-R410.00", "April 24"),
-            Expense("Lunch", "-R115.00", "April 15")
-        )
+        // ➕ OPEN ADD EXPENSE SCREEN
+        btnAddExpense.setOnClickListener {
+            val intent = Intent(this, AddExpenseActivity::class.java)
+            intent.putExtra("category_name", categoryName)
+            startActivity(intent)
+        }
 
-        val adapter = ExpenseAdapter(this, expenses)
-        list.adapter = adapter
+        // 🧠 LOAD FROM ROOM DATABASE (NO FAKE DATA)
+        val db = WonderWalletDB.getDatabase(this)
+        val dao = db.expenseDao()
+
+        dao.getAllExpenses().observe(this) { allExpenses ->
+
+            val filtered = allExpenses.filter {
+                it.category == categoryName
+            }
+
+            val adapter = ExpenseAdapter(this, filtered)
+            list.adapter = adapter
+        }
     }
 }
