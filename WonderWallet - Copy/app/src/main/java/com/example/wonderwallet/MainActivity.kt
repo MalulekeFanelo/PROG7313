@@ -1,6 +1,5 @@
 package com.example.wonderwallet
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.GridView
 import android.widget.Toast
@@ -20,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         val grid = findViewById<GridView>(R.id.gridCategories)
 
         db = WonderWalletDB.getDatabase(this)
+
+        val adapter = CategoryAdapter(this, categories)
+        grid.adapter = adapter
+    }
 
         val categoryDao = db.categoryDao()
 

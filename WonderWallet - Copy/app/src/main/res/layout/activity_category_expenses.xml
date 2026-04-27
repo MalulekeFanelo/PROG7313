@@ -1,10 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoryExpensesActivity">
+    android:background="@drawable/gradient_bg">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- TITLE -->
+    <TextView
+        android:id="@+id/txtCategoryTitle"
+        android:text="Category"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- EXPENSE LIST BOX -->
+    <LinearLayout
+        android:layout_below="@id/txtCategoryTitle"
+        android:layout_marginTop="30dp"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Recent Expenses"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- LIST -->
+        <ListView
+            android:id="@+id/listExpenses"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+    </LinearLayout>
+
+    <!-- ADD EXPENSE BUTTON -->
+    <Button
+        android:id="@+id/btnAddExpense"
+        android:text="+ ADD EXPENSE"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
