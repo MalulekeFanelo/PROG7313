@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WonderWallet">
         <activity
+            android:name=".AddExpenseActivity"
+            android:exported="false" />
+        <activity
             android:name=".Analysis"
             android:exported="false" />
         <activity

@@ -1,6 +1,5 @@
 package com.example.wonderwallet
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +8,6 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.GridView
 import com.example.wonderwallet.adapter.CategoryAdapter
 import com.example.wonderwallet.model.Category
-import android.widget.Button
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +30,6 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = CategoryAdapter(this, categories)
         grid.adapter = adapter
-
-
-
-        val intent = Intent(this, Analysis::class.java)
-        startActivity(intent)
     }
-
 
 }
