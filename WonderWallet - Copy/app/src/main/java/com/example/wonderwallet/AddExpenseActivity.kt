@@ -34,8 +34,7 @@ class AddExpenseActivity : AppCompatActivity() {
             DatePickerDialog(
                 this,
                 { _, year, month, day ->
-                    val date = "$day/${month + 1}/$year"
-                    editDate.setText(date)
+                    editDate.setText("$day/${month + 1}/$year")
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -71,7 +70,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 amount = amount
             )
 
-            // ✅ ROOM DATABASE SAVE
+            // 🧠 ROOM INSERT
             val db = WonderWalletDB.getDatabase(this)
             val dao = db.expenseDao()
 

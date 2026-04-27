@@ -16,15 +16,10 @@ import androidx.room.RoomDatabase
 )
 abstract class WonderWalletDB : RoomDatabase() {
 
-<<<<<<< HEAD
-    abstract fun expenseDao(): ExpenseDAO
-=======
     // 📦 DAOs
     abstract fun expenseDao(): ExpenseDAO
     abstract fun monthlyBudgetDao(): MonthlyBudgetDAO
-
     abstract fun categoryDao(): CategoryDAO
->>>>>>> 795d7939929ee39dc821bb3f7c9d7adf789c4e7b
 
     companion object {
 
@@ -37,13 +32,9 @@ abstract class WonderWalletDB : RoomDatabase() {
                     context.applicationContext,
                     WonderWalletDB::class.java,
                     "wonder_wallet_database"
-<<<<<<< HEAD
-                ).build()
-=======
                 )
                     .fallbackToDestructiveMigration()
                     .build()
->>>>>>> 795d7939929ee39dc821bb3f7c9d7adf789c4e7b
 
                 INSTANCE = instance
                 instance
