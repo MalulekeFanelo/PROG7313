@@ -1,12 +1,15 @@
 package com.example.wonderwallet
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.GridView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+
 import com.example.wonderwallet.adapter.CategoryAdapter
 import com.example.wonderwallet.model.Category
 import com.example.wonderwallet.model.WonderWalletDB
+import androidx.lifecycle.Observer
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,13 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         db = WonderWalletDB.getDatabase(this)
 
-        val adapter = CategoryAdapter(this, categories)
-        grid.adapter = adapter
-    }
-
         val categoryDao = db.categoryDao()
 
-        //  Load categories from database
+        // 🟢 LOAD CATEGORIES FROM ROOM
         categoryDao.getAllCategories().observe(this) { categories ->
 
             if (categories.isEmpty()) {
@@ -35,19 +34,17 @@ class MainActivity : AppCompatActivity() {
 
             val adapter = CategoryAdapter(this, categories)
             grid.adapter = adapter
-        }
 
-        //  Category click handling (IMPORTANT FOR FUNCTIONALITY)
-        grid.setOnItemClickListener { _, _, position, _ ->
+            // 🟢 CLICK HANDLING (INSIDE OBSERVER FOR SAFETY)
+            grid.setOnItemClickListener { _, _, position, _ ->
 
-            val selectedCategory = grid.adapter.getItem(position) as Category
+                val selectedCategory = categories[position]
 
-            // Example: navigate to another screen (you can change this)
-            val intent = Intent(this, Analysis::class.java).apply {
-                putExtra("category_name", selectedCategory.name)
+                val intent = Intent(this, CategoryExpensesActivity::class.java)
+                intent.putExtra("category_name", selectedCategory.name)
+
+                startActivity(intent)
             }
-
-            startActivity(intent)
         }
     }
 }
